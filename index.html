@@ -10,14 +10,16 @@
   <body>
     <header id="header">      
       <h1>Rick and Morty</h1>
-      <input class="header__search-input" type="text" placeholder="search by name" data-js="nameSearch">
+      <form action="" data-js="searchForm">
+      <input class="header__search-input" name="search" type="text" placeholder="search by name" data-js="nameSearch">
       <select class="header__filter" name="filter" id="filter" data-js="filter">
         <option value="">all</option>
         <option value="Alive">alive</option>
         <option value="Dead">dead</option>
         <option value="unknown">unknown</option>
       </select>
-      <button type="button" class="header__dataButton" data-js="fetchDataButton">Search</button>
+      <button type="submit" class="header__dataButton" data-js="fetchDataButton">Search</button>
+      </form>
     </header>
     
     <main class="main" id="app">

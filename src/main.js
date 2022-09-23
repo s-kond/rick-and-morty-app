@@ -1,25 +1,30 @@
 const main = document.querySelector('.main');
-const fetchDataButton = document.querySelector('[data-js="fetchDataButton"]');
+/* const fetchDataButton = document.querySelector('[data-js="fetchDataButton"]'); */
 const filterButton = document.querySelector('[data-js="filter"]');
 const nameSearch = document.querySelector('[data-js="nameSearch"]');
 let apiURL;
+const searchForm = document.querySelector('[data-js="searchForm"]');
+
 
 window.addEventListener('load', () => {
     fetchCards('https://rickandmortyapi.com/api/character/');
 })
 
-fetchDataButton.addEventListener('click', () => {   
-    buildAPI();
+searchForm.addEventListener('submit', event => {   
+    event.preventDefault();
+    const newForm = new FormData(event.target);
+    const formdata = Object.fromEntries(newForm);
+    buildAPI(formdata);
     fetchCards(apiURL);
 });
 
-function buildAPI(){
-    const filterAPI = filterButton.value.toLowerCase();
-    const search = nameSearch.value.toLowerCase(); 
-    if (search === ""){
+function buildAPI({search, filter}){
+    const filterAPI = filter.toLowerCase();
+    const search2 = search.toLowerCase(); 
+    if (search2 === ""){
         return apiURL = `https://rickandmortyapi.com/api/character/${filterAPI ? '?status=' + filterAPI : ''}`;
     } else {
-        return apiURL = `https://rickandmortyapi.com/api/character/${search ? '?name=' + search : ''}${filterAPI ? '&status=' + filterAPI : ''}`;
+        return apiURL = `https://rickandmortyapi.com/api/character/${search2 ? '?name=' + search2 : ''}${filterAPI ? '&status=' + filterAPI : ''}`;
     }
 }
 
