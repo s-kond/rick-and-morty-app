@@ -1,4 +1,3 @@
-const apiURL = "https://rickandmortyapi.com/api/character";
 const main = document.querySelector('.main');
 const fetchDataButton = document.querySelector('[data-js="fetchDataButton"]');
 const filterButton = document.querySelector('[data-js="filter"]');
@@ -7,10 +6,22 @@ const nameSearch = document.querySelector('[data-js="nameSearch"]');
 fetchDataButton.addEventListener('click', () => {
 main.innerHTML = "";
 const filter = filterButton.value;
+const filterAPI = filterButton.value.toLowerCase();
 const search = nameSearch.value.toLowerCase(); 
 
 console.log(`Search: ${search}, Filter: ${filter}`);
-    fetch(apiURL)
+
+let apiURL;
+function chooseAPI(){
+if (search === ""){
+    return apiURL = `https://rickandmortyapi.com/api/character/${filterAPI ? '?status=' + filterAPI : ''}`;
+} else {
+    return apiURL = `https://rickandmortyapi.com/api/character/${search ? '?name=' + search : ''}${filterAPI ? '&status=' + filterAPI : ''}`;
+}
+}
+chooseAPI();
+console.log(apiURL)
+fetch(apiURL)
     .then(response => response.json())
     .then(data => {
         /* console.log(data.results); */
