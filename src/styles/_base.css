@@ -70,7 +70,7 @@ footer {
   margin: 20px;
   width: 70%;
   max-width: 400px;
-  padding: 50px 0;
+  padding: 40px 0;
   text-align: center;
   background-color: lightgreen;
   border-radius: 20px;
@@ -81,6 +81,42 @@ footer {
   width: 80%;
   max-width: 400px;
   border-radius: 10px;
+}
+
+.card__characterInfo p {
+  margin-bottom: 6px;;
+}
+
+.unknown-icon {
+  content: " ";
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: grey;
+  border-radius: 50%;
+}
+
+.alive-icon {
+  content: " ";
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: green;
+  border-radius: 50%;
+}
+
+.dead-icon {
+  content: " ";
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.card__characterInfo .character-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  margin-bottom: 20px;
 }
 
 .dead {
@@ -94,11 +130,10 @@ footer {
 
 .card__characterInfo {
   margin: 20px 10% 0 10%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   text-align: left;
 }
+
+
 
 @keyframes blob {
   0% {
