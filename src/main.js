@@ -2,19 +2,21 @@ const apiURL = "https://rickandmortyapi.com/api/character";
 const main = document.querySelector('.main');
 const fetchDataButton = document.querySelector('[data-js="fetchDataButton"]');
 const filterButton = document.querySelector('[data-js="filter"]');
+const nameSearch = document.querySelector('[data-js="nameSearch"]');
 
 fetchDataButton.addEventListener('click', () => {
 main.innerHTML = "";
 const filter = filterButton.value;
-console.log(filter);
+const search = nameSearch.value.toLowerCase(); 
+
+console.log(`Search: ${search}, Filter: ${filter}`);
     fetch(apiURL)
     .then(response => response.json())
     .then(data => {
-        console.log(data.results);
-        data.results.forEach(person => {
-            const {name, status, image, origin, location } = person;
-            /* console.log(status);
-            console.log(filter); */
+        /* console.log(data.results); */
+        data.results.forEach(({name, status, image, origin, location }) => {
+            let compareName = name.toLowerCase();
+            if (compareName.includes(search) || search === ""){
             if (status === filter || filter === "") {
 
             const characterCard = document.createElement('article');
@@ -52,6 +54,7 @@ console.log(filter);
             characterCard.append(picture, characterInfo);
             main.append(characterCard);
             }
+        }
         })
     })
     .catch(error => console.log("Something went wrong...", error));
