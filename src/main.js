@@ -10,9 +10,9 @@ console.log(filter);
     fetch(apiURL)
     .then(response => response.json())
     .then(data => {
-        /* console.log(data.results); */
+        console.log(data.results);
         data.results.forEach(person => {
-            const {name, status, image } = person;
+            const {name, status, image, origin, location } = person;
             /* console.log(status);
             console.log(filter); */
             if (status === filter || filter === "") {
@@ -35,8 +35,20 @@ console.log(filter);
             characterName.innerText = `Name: ${name}`;
             const characterStatus = document.createElement("p");
             characterStatus.innerText = `Status: ${status}`
-
+            
             characterInfo.append(characterName, characterStatus)
+            
+            if(origin.name != "unknown"){
+                const characterOrigin = document.createElement("p");
+                characterOrigin.innerText = `Origin: ${origin.name}`
+                characterInfo.append(characterOrigin);
+            }
+            if(location.name != "unknown"){
+                const characterLocation = document.createElement("p");
+                characterLocation.innerText = `Current location: ${location.name}`
+                characterInfo.append(characterLocation);
+            }
+            
             characterCard.append(picture, characterInfo);
             main.append(characterCard);
             }
