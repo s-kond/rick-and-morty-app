@@ -37,7 +37,7 @@ function renderCards(people){
     main.innerHTML = "";
     const filter = filterButton.value;
     const search = nameSearch.value.toLowerCase(); 
-    people.forEach(({name, status, image, origin, location }) => {
+    people.forEach(({name, status, image, origin, location, species }) => {
         let compareName = name.toLowerCase();
         if (compareName.includes(search) || search === ""){
         if (status === filter || filter === "") {
@@ -56,12 +56,21 @@ function renderCards(people){
         
         const characterInfo = document.createElement('div');
         characterInfo.classList.add("card__characterInfo");
-        const characterName = document.createElement("p");
-        characterName.innerText = `Name: ${name}`;
+        const characterName = document.createElement("h2");
+        characterName.innerText = `${name}`;
+
+        characterInfo.append(characterName);
+
         const characterStatus = document.createElement("p");
-        characterStatus.innerText = `Status: ${status}`
-        
-        characterInfo.append(characterName, characterStatus)
+        characterStatus.classList.add("character-status")
+        if (status === "unknown") {
+            characterStatus.innerHTML = `<span class="unknown-icon"></span> ${status} - ${species}`
+        } else if (status === "Alive"){
+            characterStatus.innerHTML = `<span class="alive-icon"></span> ${status} - ${species}`
+        } else {
+            characterStatus.innerHTML = `<span class="dead-icon"></span> ${status} - ${species}`
+        }
+        characterInfo.append(characterStatus)
         
         if(origin.name != "unknown"){
             const characterOrigin = document.createElement("p");
@@ -70,7 +79,7 @@ function renderCards(people){
         }
         if(location.name != "unknown"){
             const characterLocation = document.createElement("p");
-            characterLocation.innerText = `Current location: ${location.name}`
+            characterLocation.innerText = `Last seen: ${location.name}`
             characterInfo.append(characterLocation);
         }
         
