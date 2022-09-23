@@ -5,13 +5,27 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/styles/index.css" />
-    <title>Vite App</title>
+    <title>Rick and Morty</title>
   </head>
   <body>
     <header>
-      <h1>Hello World</h1>
+      <h1>Rick and Morty</h1>
+      <input class="header__search-input" type="text" placeholder="search by name">
+      <select class="header__filter" name="filter" id="filter" data-js="filter">
+        <option value="">all</option>
+        <option value="Alive">alive</option>
+        <option value="Dead">dead</option>
+        <option value="unknown">unknown</option>
+      </select>
+      <button type="button" class="header__dataButton" data-js="fetchDataButton">Fetch Data</button>
     </header>
-    <div id="app"></div>
+    
+    <main class="main" id="app">
+
+    </main>
+    <footer>
+      <p>Made with love by Stefan</p>
+    </footer>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
