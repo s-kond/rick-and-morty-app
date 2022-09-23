@@ -36,6 +36,16 @@ h1 {
   color: white;
 }
 
+@media (min-width: 760px) {
+  header {
+    justify-content: center;
+    gap: 30px;
+  }
+  .header__search-input, .header__filter, .header__dataButton {
+    margin-top: unset;
+  }
+}
+
 footer {
   display: flex;
   width: 100%;
