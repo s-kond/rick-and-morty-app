@@ -10,7 +10,11 @@ html {
   font-size: 16px;
 }
 
-header {
+form {
+  width: 100%;
+}
+
+header, form {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -37,7 +41,7 @@ h1 {
 }
 
 @media (min-width: 760px) {
-  header {
+  header, form {
     justify-content: center;
     gap: 30px;
   }
