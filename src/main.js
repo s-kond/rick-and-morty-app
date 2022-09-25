@@ -12,10 +12,11 @@ window.addEventListener('load', () => {
 
 searchForm.addEventListener('submit', event => {   
     event.preventDefault();
+    main.innerHTML = "";
     const newForm = new FormData(event.target);
     const formdata = Object.fromEntries(newForm);
     buildAPI(formdata);
-    fetchCards(apiURL);
+    fetchCards(apiURL, formdata);
 });
 
 function buildAPI({search, filter}){
@@ -28,18 +29,48 @@ function buildAPI({search, filter}){
     }
 }
 
-async function fetchCards(apiURL){
+
+//um alle Ergebnisse angezeigt zu bekommen, nicht nur die ersten 20 (API mehrere Seiten á 20 Ergebnisse zurück)
+function buildPagesAPI(search, filter, page){
+    const filterAPI = filter.toLowerCase();
+    const search2 = search.toLowerCase(); 
+    if (search2 === ""){
+        return `https://rickandmortyapi.com/api/character/${filterAPI ? '?status=' + filterAPI + '&page=' + page : ''}`;
+    } else {
+        return `https://rickandmortyapi.com/api/character/${search2 ? '?name=' + search2 : ''}${filterAPI ? '&status=' + filterAPI + '&page=' + page : ''}`;
+    }
+}
+
+async function fetchCards(apiURL, formdata){
     try {
         const response = await fetch(apiURL);
         const data = await response.json();
+        
+        const pages = data.info.pages;
+        console.log(pages);
+        console.log(data.results);
+        const resultCounter = document.createElement('p');
+        resultCounter.innerText = `Total results: ${data.info.count}`;
+        resultCounter.classList.add("card-results");
+        main.append(resultCounter);
         renderCards(data.results);
+        if (formdata){
+            for (let page = 1; page <= pages; page ++){
+                let apiURLMorePages = buildPagesAPI(formdata.search, formdata.filter, page);
+                console.log(apiURLMorePages);
+                const responseMorePages = await fetch(apiURLMorePages)
+                const dataMorePages = await responseMorePages.json();
+                renderCards(dataMorePages.results);
+            }
+        }
     } catch(error) {
         console.error("Something went wrong: " + error.message);
     }
 }
+/* 
+ */
 
 function renderCards(people){
-    main.innerHTML = "";
     const filter = filterButton.value;
     const search = nameSearch.value.toLowerCase(); 
     people.forEach(({name, status, image, origin, location, species }) => {
