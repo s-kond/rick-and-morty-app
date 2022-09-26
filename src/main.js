@@ -30,8 +30,9 @@ function buildAPI({search, filter}){
 }
 
 
-//um alle Ergebnisse angezeigt zu bekommen, nicht nur die ersten 20 (API gibt mehrere Seiten á 20 Ergebnisse zurück)
-function buildPagesAPI(search, filter, page){
+//um alle Ergebnisse angezeigt zu bekommen, nicht nur die ersten 20 (API gibt mehrere Seiten á 20 Ergebnisse zurück), muss der kommentierte Code wiedereingefügt werden
+//wegen des teilweise hohen Datenvolumens wurde diese Funktion deaktiviert
+/* function buildPagesAPI(search, filter, page){
     const filterAPI = filter.toLowerCase();
     const search2 = search.toLowerCase(); 
     if (search2 === ""){
@@ -39,9 +40,9 @@ function buildPagesAPI(search, filter, page){
     } else {
         return `https://rickandmortyapi.com/api/character/?name=${search2}${filterAPI ? '&status=' + filterAPI + '&page=' + page : '&page=' + page}`;
     }
-}
+} */
 
-async function fetchCards(apiURL, formdata){
+async function fetchCards(apiURL/* , formdata */){
     try {
         const response = await fetch(apiURL);
         const data = await response.json();
@@ -54,7 +55,7 @@ async function fetchCards(apiURL, formdata){
         resultCounter.classList.add("card-results");
         main.append(resultCounter);
         renderCards(data.results);
-        if (formdata){
+        /* if (formdata){
             for (let page = 2; page <= pages; page ++){
                 let apiURLMorePages = buildPagesAPI(formdata.search, formdata.filter, page);
                 console.log(apiURLMorePages);
@@ -62,7 +63,7 @@ async function fetchCards(apiURL, formdata){
                 const dataMorePages = await responseMorePages.json();
                 renderCards(dataMorePages.results);
             }
-        }
+        } */
     } catch(error) {
         console.error("Something went wrong: " + error.message);
     }
