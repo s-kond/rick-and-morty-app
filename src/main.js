@@ -25,19 +25,19 @@ function buildAPI({search, filter}){
     if (search2 === ""){
         return apiURL = `https://rickandmortyapi.com/api/character/${filterAPI ? '?status=' + filterAPI : ''}`;
     } else {
-        return apiURL = `https://rickandmortyapi.com/api/character/${search2 ? '?name=' + search2 : ''}${filterAPI ? '&status=' + filterAPI : ''}`;
+        return apiURL = `https://rickandmortyapi.com/api/character/?name=${search2}${filterAPI ? '&status=' + filterAPI : ''}`;
     }
 }
 
 
-//um alle Ergebnisse angezeigt zu bekommen, nicht nur die ersten 20 (API mehrere Seiten á 20 Ergebnisse zurück)
+//um alle Ergebnisse angezeigt zu bekommen, nicht nur die ersten 20 (API gibt mehrere Seiten á 20 Ergebnisse zurück)
 function buildPagesAPI(search, filter, page){
     const filterAPI = filter.toLowerCase();
     const search2 = search.toLowerCase(); 
     if (search2 === ""){
-        return `https://rickandmortyapi.com/api/character/${filterAPI ? '?status=' + filterAPI + '&page=' + page : ''}`;
+        return `https://rickandmortyapi.com/api/character/${filterAPI ? '?status=' + filterAPI + '&page=' + page : '?page=' + page}`;
     } else {
-        return `https://rickandmortyapi.com/api/character/${search2 ? '?name=' + search2 : ''}${filterAPI ? '&status=' + filterAPI + '&page=' + page : ''}`;
+        return `https://rickandmortyapi.com/api/character/?name=${search2}${filterAPI ? '&status=' + filterAPI + '&page=' + page : '&page=' + page}`;
     }
 }
 
