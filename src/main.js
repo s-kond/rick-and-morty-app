@@ -55,7 +55,7 @@ async function fetchCards(apiURL, formdata){
         main.append(resultCounter);
         renderCards(data.results);
         if (formdata){
-            for (let page = 1; page <= pages; page ++){
+            for (let page = 2; page <= pages; page ++){
                 let apiURLMorePages = buildPagesAPI(formdata.search, formdata.filter, page);
                 console.log(apiURLMorePages);
                 const responseMorePages = await fetch(apiURLMorePages)
