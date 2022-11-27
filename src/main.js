@@ -89,7 +89,7 @@ async function fetchCards(apiURL /* , formdata */) {
     const response = await fetch(apiURL);
     const data = await response.json();
 
-    const pages = data.info.pages;
+    /* const pages = data.info.pages; */
     const resultCounter = document.createElement("p");
     resultCounter.innerText = `Total results: ${data.info.count}`;
     resultCounter.classList.add("card-results");
